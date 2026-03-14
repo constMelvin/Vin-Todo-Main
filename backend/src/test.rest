@@ -1,0 +1,36 @@
+POST http://localhost:4001/api/auth/sign-in/email/
+Content-Type: application/json
+
+{
+    "email": "user1@example.com",
+    "password": "user12345",
+    "rememberMe": true
+}
+
+###
+POST http://localhost:4001/api/auth/sign-out/
+
+
+###
+POST http://localhost:4001/api/add-todo
+Content-Type: application/json
+
+{
+    "description": "Do online class on 1:30 pm",
+    "task_name": "Task 2"
+}
+
+###
+GET http://localhost:4001/api/all-todos
+
+###
+PUT http://localhost:4001/api/todo/d900dd83-7264-4f6e-92b7-aadfd1982770
+Content-Type: application/json
+
+{
+    "status": true
+}
+
+###
+
+DELETE  http://localhost:4001/api/todo/013696a7-dedc-45ca-ad4c-d548d11a0e3f

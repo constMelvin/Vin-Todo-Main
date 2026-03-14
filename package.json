@@ -1,0 +1,20 @@
+{
+	"name": "honotuts",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"prod": "concurrently \"npm run server\" \"npm run client\"",
+		"client": "npm run --prefix client dev",
+		"server": "npm run --prefix backend dev"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"type": "commonjs",
+	"devDependencies": {
+		"@types/node": "^25.5.0",
+		"concurrently": "^9.2.0"
+	}
+}

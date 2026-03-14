@@ -1,0 +1,31 @@
+{
+	"compilerOptions": {
+		/* Defaults */
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"target": "ESNext",
+		"allowJs": true,
+		"checkJs": true,
+		"resolveJsonModule": true,
+		"moduleDetection": "force",
+		"forceConsistentCasingInFileNames": true,
+		"strict": true,
+		"noUncheckedIndexedAccess": true,
+		"verbatimModuleSyntax": false, // ← false, conflicts pag CommonJS
+
+		/* Paths */
+		"ignoreDeprecations": "6.0",
+		"baseUrl": "./src", // ← changed
+		"paths": {
+			"@/*": ["./*"] // ← updated to match new baseUrl
+		},
+
+		/* Bundling */
+		"module": "Preserve", // ← add this
+		"moduleResolution": "Bundler",
+		"rootDir": "./src", // ← add this
+		"outDir": "./dist"
+	},
+	"include": ["src/**/*.ts"],
+	"exclude": ["node_modules", "dist"]
+}
