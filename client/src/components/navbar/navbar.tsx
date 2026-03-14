@@ -13,10 +13,11 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { userTodoStore } from "@/store/user";
 import { Link, useNavigate } from "react-router-dom";
-import CreateTask from "./Create-Task";
-import EditProfile from "./Edit-Profile";
 import { useEffect } from "react";
 import { useSession } from "@/lib/auth-client";
+
+import EditProfile from "./Edit-Profile";
+import CreateTask from "./Create-Task";
 
 const Navbar = () => {
 	const { theme, setTheme } = useTheme();
