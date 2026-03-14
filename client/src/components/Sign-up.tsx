@@ -16,82 +16,82 @@ import {
 	EyeOffIcon,
 	LockIcon,
 	MailIcon,
+	UserPen,
 	XIcon,
 } from "lucide-react";
 import { Separator } from "./ui/separator";
 import { Link } from "react-router-dom";
 import clsx from "clsx";
-
 import { z } from "zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { authClient } from "@/lib/auth-client";
 
-const SignUpSchema = z.object({
-	email: z.email({ message: "Please enter a valid email address." }),
-	name: z.string().min(1, "Name is required"),
-	password: z.string().min(8, "Password must be at least 8 characters long"),
-});
+const SignUpSchema = z
+	.object({
+		name: z.string().min(0),
+		email: z
+			.string()
+			.email({ message: "Please enter a valid email address." }),
+		password: z
+			.string()
+			.min(8, "Password must be at least 8 characters long"),
+		confirmPassword: z.string().min(8),
+	})
+	.refine((data) => data.password === data.confirmPassword, {
+		message: "Passwords do not match",
+		path: ["confirmPassword"],
+	});
 
 export type SignUpFormFields = z.infer<typeof SignUpSchema>;
 
 const SignUp = () => {
 	const {
 		register,
+		watch,
 		handleSubmit,
 		formState: { errors },
 	} = useForm<SignUpFormFields>({
 		resolver: zodResolver(SignUpSchema),
 	});
-	const [password, setPassword] = useState("");
-	const [value, setValue] = useState({
-		email: "",
-		name: "",
-		password: "",
-	});
-
-	const [email, setEmail] = useState("");
+	const email = watch("email");
 	const isValidEmail =
-		/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(
-			value.email.trim()
-		);
-
-	const [confirmPassword, setConfirmPassword] = useState("");
-
+		/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
 	const [isVisible, setIsVisible] = useState<boolean>(false);
 	const [isConfirmVisible, setIsConfirmVisible] = useState<boolean>(false);
 
 	const onSubmit: SubmitHandler<SignUpFormFields> = async (data) => {
 		try {
-			await new Promise((resolve) => setTimeout(resolve, 2000));
+			await authClient.signUp.email(data);
 			console.log(data);
 		} catch (error) {}
 	};
 
-	const submitForm = (e: MouseEvent<HTMLFormElement>) => {
-		e.preventDefault();
-		setValue((prev) => ({
-			...prev,
-			password: confirmPassword,
-		}));
+	// const submitForm = (e: MouseEvent<HTMLFormElement>) => {
+	// 	e.preventDefault();
+	// 	setValue((prev) => ({
+	// 		...prev,
+	// 		password: confirmPassword,
+	// 	}));
 
-		if (!value.email || !value.password || !confirmPassword) {
-			alert("Please fill in all fields.");
-			return;
-		}
+	// 	if (!value.email || !value.password || !confirmPassword) {
+	// 		alert("Please fill in all fields.");
+	// 		return;
+	// 	}
 
-		if (!isValidEmail || strengthScore < 5) {
-			alert("Please enter a valid email and a strong password.");
-			return;
-		}
+	// 	if (!isValidEmail || strengthScore < 5) {
+	// 		alert("Please enter a valid email and a strong password.");
+	// 		return;
+	// 	}
 
-		if (password !== value.password) {
-			alert("Passwords do not match.");
-			return;
-		}
-		if (password === value.password && isValidEmail) {
-			console.log("Form submitted with values:", value);
-		}
-	};
+	// 	if (password !== value.password) {
+	// 		alert("Passwords do not match.");
+	// 		return;
+	// 	}
+	// 	if (password === value.password && isValidEmail) {
+	// 		console.log("Form submitted with values:", value);
+	// 	}
+	// };
 
 	const toggleVisibility = (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
@@ -116,7 +116,7 @@ const SignUp = () => {
 		}));
 	};
 
-	const strength = checkStrength(password);
+	const strength = checkStrength(watch("password"));
 
 	const strengthScore = useMemo(() => {
 		return strength.filter((req) => req.met).length;
@@ -156,6 +156,19 @@ const SignUp = () => {
 						<div className="flex flex-col gap-3">
 							<div
 								className={clsx(
+									"relative flex items-center rounded-md border focus-within:ring-1 focus-within:ring-ring pl-2"
+								)}
+							>
+								<UserPen className="h-5 w-5 text-muted-foreground" />
+								<Input
+									type="text"
+									placeholder="Name"
+									className="border-0 focus-visible:ring-0 shadow-none"
+									{...register("name")}
+								/>
+							</div>
+							<div
+								className={clsx(
 									"relative flex items-center rounded-md border focus-within:ring-1 focus-within:ring-ring pl-2",
 									isValidEmail && "border-emerald-500"
 								)}
@@ -165,15 +178,7 @@ const SignUp = () => {
 									type="email"
 									placeholder="Email"
 									className="border-0 focus-visible:ring-0 shadow-none"
-									onChange={(
-										e: ChangeEvent<HTMLInputElement>
-									) =>
-										setValue({
-											...value,
-											email: e.target.value,
-										})
-									}
-									value={value.email}
+									{...register("email")}
 								/>
 							</div>
 							<div
@@ -187,11 +192,7 @@ const SignUp = () => {
 									type={isVisible ? "text" : "password"}
 									placeholder="Password"
 									className="border-0 focus-visible:ring-0 shadow-none"
-									onChange={(
-										e: ChangeEvent<HTMLInputElement>
-									) => {
-										setPassword(e.target.value);
-									}}
+									{...register("password")}
 								/>
 								<button
 									onClick={toggleVisibility}
@@ -204,7 +205,7 @@ const SignUp = () => {
 									)}
 								</button>
 							</div>
-							{password.length > 0 && strengthScore < 5 && (
+							{watch("password") !== "" && strengthScore < 5 && (
 								<div className="flex flex-col gap-2 mt-2">
 									<div
 										className="bg-border h-1 w-full overflow-hidden rounded-full"
@@ -278,15 +279,12 @@ const SignUp = () => {
 							<div className="relative flex items-center rounded-md border focus-within:ring-1 focus-within:ring-ring px-2">
 								<LockIcon className="h-5 w-5 text-muted-foreground" />
 								<Input
-									value={confirmPassword}
 									type={
 										isConfirmVisible ? "text" : "password"
 									}
 									placeholder="Confirm Password"
 									className="border-0 focus-visible:ring-0 shadow-none"
-									onChange={(
-										e: ChangeEvent<HTMLInputElement>
-									) => setConfirmPassword(e.target.value)}
+									{...register("confirmPassword")}
 								/>
 								<button
 									onClick={toggleConfirmVisibility}
@@ -300,15 +298,17 @@ const SignUp = () => {
 								</button>
 							</div>
 
-							{confirmPassword && (
+							{watch("confirmPassword") && (
 								<p
 									className={`mt-1 text-sm ${
-										confirmPassword === password
+										watch("confirmPassword") ===
+										watch("password")
 											? "text-green-600"
 											: "text-red-600"
 									}`}
 								>
-									{confirmPassword === password
+									{watch("confirmPassword") ===
+									watch("password")
 										? "Passwords match"
 										: "Passwords do not match"}
 								</p>

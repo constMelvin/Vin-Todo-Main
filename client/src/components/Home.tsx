@@ -108,6 +108,8 @@ const Home = () => {
 		}
 	}, [session]);
 
+	console.log(import.meta.env.BACKEND_URL)
+
 	return (
 		<Tabs defaultValue="tab-1">
 			<TabsList className="flex mx-auto md:mx-10 h-auto rounded-none border-b bg-transparent p-0 mb-5">
