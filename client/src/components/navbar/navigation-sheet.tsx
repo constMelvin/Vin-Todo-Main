@@ -6,8 +6,7 @@ import {
 	SheetTrigger,
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
-
-import CreateTask from "./Create-Task";
+import CreateTask from "../Create-Task";
 
 export const NavigationSheet = () => {
 	return (

@@ -9,8 +9,8 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { User } from "lucide-react";
-import { Button } from "../ui/button";
 import { useState } from "react";
+import { Button } from "./ui/button";
 
 const EditProfile = () => {
 	const [isOpen, setIsOpen] = useState(false);

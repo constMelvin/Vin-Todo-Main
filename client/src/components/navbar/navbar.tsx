@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { NavigationSheet } from "./navigation-sheet";
-import { SunIcon, MoonIcon, LogOut, Settings, User, Plus } from "lucide-react";
+import { SunIcon, MoonIcon, LogOut, Settings } from "lucide-react";
 import { useTheme } from "../theme-provider";
 import {
 	DropdownMenu,
@@ -15,9 +15,8 @@ import { userTodoStore } from "@/store/user";
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useSession } from "@/lib/auth-client";
-
-import EditProfile from "./Edit-Profile";
-import CreateTask from "./Create-Task";
+import CreateTask from "../Create-Task";
+import EditProfile from "../Edit-Profile";
 
 const Navbar = () => {
 	const { theme, setTheme } = useTheme();

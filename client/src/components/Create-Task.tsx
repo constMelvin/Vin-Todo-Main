@@ -1,4 +1,9 @@
 import { CheckCircle2Icon, LoaderIcon, Plus } from "lucide-react";
+import z from "zod";
+import { useForm, type SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTodoStore } from "@/store/todo";
+import { toast } from "sonner";
 import {
 	Dialog,
 	DialogClose,
@@ -8,18 +13,12 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "../ui/dialog";
-
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { Label } from "../ui/label";
-import { Textarea } from "../ui/textarea";
-import z from "zod";
-import { useForm, type SubmitHandler } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useTodoStore } from "@/store/todo";
-import { toast } from "sonner";
-import { Separator } from "../ui/separator";
+} from "./ui/dialog";
+import { Button } from "./ui/button";
+import { Separator } from "./ui/separator";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
+import { Textarea } from "./ui/textarea";
 
 const TaskSchema = z.object({
 	task_name: z.string().min(1, "Task name are required."),

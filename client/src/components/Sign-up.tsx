@@ -1,4 +1,4 @@
-import { useMemo, useState, type ChangeEvent, type MouseEvent } from "react";
+import { useMemo, useState, type MouseEvent } from "react";
 import {
 	Card,
 	CardContent,
@@ -46,12 +46,7 @@ const SignUpSchema = z
 export type SignUpFormFields = z.infer<typeof SignUpSchema>;
 
 const SignUp = () => {
-	const {
-		register,
-		watch,
-		handleSubmit,
-		formState: { errors },
-	} = useForm<SignUpFormFields>({
+	const { register, watch, handleSubmit } = useForm<SignUpFormFields>({
 		resolver: zodResolver(SignUpSchema),
 	});
 	const email = watch("email");
@@ -66,32 +61,6 @@ const SignUp = () => {
 			console.log(data);
 		} catch (error) {}
 	};
-
-	// const submitForm = (e: MouseEvent<HTMLFormElement>) => {
-	// 	e.preventDefault();
-	// 	setValue((prev) => ({
-	// 		...prev,
-	// 		password: confirmPassword,
-	// 	}));
-
-	// 	if (!value.email || !value.password || !confirmPassword) {
-	// 		alert("Please fill in all fields.");
-	// 		return;
-	// 	}
-
-	// 	if (!isValidEmail || strengthScore < 5) {
-	// 		alert("Please enter a valid email and a strong password.");
-	// 		return;
-	// 	}
-
-	// 	if (password !== value.password) {
-	// 		alert("Passwords do not match.");
-	// 		return;
-	// 	}
-	// 	if (password === value.password && isValidEmail) {
-	// 		console.log("Form submitted with values:", value);
-	// 	}
-	// };
 
 	const toggleVisibility = (e: MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
