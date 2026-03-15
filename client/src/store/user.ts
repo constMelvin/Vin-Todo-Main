@@ -71,7 +71,7 @@ export const userTodoStore = create(
 			signInWithSocial: async () => {
 				await authClient.signIn.social({
 					provider: "google",
-					callbackURL: "http://localhost:5173/",
+					callbackURL: "https://vin-todo.vercel.app/",
 					// disableRedirect: true,
 				});
 			},
