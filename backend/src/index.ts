@@ -25,6 +25,8 @@ const app = new Hono<HonoEnv>()
 
 const router = app.route("/api", rootRoutes);
 
+console.log(envConfig.FRONTEND_URL);
+
 /* All Routes here */
 
 // routes.forEach((route) => {
