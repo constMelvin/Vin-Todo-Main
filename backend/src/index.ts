@@ -13,30 +13,17 @@ const app = new Hono<HonoEnv>()
 	.use(
 		"/api/*",
 		cors({
-			origin: envConfig.FRONTEND_URL,
+			origin: [envConfig.FRONTEND_URL],
 			credentials: true,
 			allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+			allowHeaders: ["Content-Type", "Authorization"],
 		})
 	)
 	.get("/ok", (c: Context) => {
 		return c.text("Backend Api ok.");
 	})
-	.on(["POST"], "/api/auth/**", async (c: Context) => {
-		const res = await auth.handler(c.req.raw); // returns Response
-
-		// Parse JSON body
-		const data = await res.json(); // data may have token/session
-
-		// Set cookie if Better Auth returns a token
-		if (data.token) {
-			c.header(
-				"Set-Cookie",
-				`session=${data.token}; Path=/; HttpOnly; Secure; SameSite=None; Max-Age=86400`
-			);
-		}
-
-		// Return the original response
-		return c.json(data);
+	.on(["POST", "GET"], "/api/auth/**", (c) => {
+		return auth.handler(c.req.raw);
 	});
 
 const router = app.route("/api", rootRoutes);

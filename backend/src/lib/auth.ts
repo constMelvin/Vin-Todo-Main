@@ -10,8 +10,20 @@ export const auth = betterAuth({
 	}),
 	emailAndPassword: { enabled: true },
 	plugins: [openAPI()],
-	trustedOrigins: ["http://localhost:5173", envConfig.FRONTEND_URL],
+	trustedOrigins: [envConfig.FRONTEND_URL],
 	baseURL: envConfig.BETTER_AUTH_URL,
+
+	advanced: {
+		useSecureCookies: true,
+		crossSubDomainCookies: {
+			enabled: false,
+		},
+		defaultCookieAttributes: {
+			sameSite: "none",
+			secure: true,
+			partitioned: true,
+		},
+	},
 	socialProviders: {
 		google: {
 			prompt: "select_account",
