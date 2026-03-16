@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 
 	useEffect(() => {
 		if (!session) {
-			// just call refetch, then mark checked manually
+			console.log(session);
 			refetch?.();
 		}
 		setChecked(true);
