@@ -7,7 +7,7 @@ export default defineConfig(({ mode }) => {
 	// load env variables for the current mode
 	const env = loadEnv(mode, process.cwd());
 
-	console.log("Backend URL:", env.VITE_BACKEND_URL); // optional debug
+	console.log("Backend URL:", env.VITE_API_URL); // optional debug
 
 	return {
 		plugins: [react(), tailwindcss()],
