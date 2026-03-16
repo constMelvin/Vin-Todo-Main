@@ -17,7 +17,6 @@ const app = new Hono<HonoEnv>()
 			credentials: true,
 			allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
 			allowHeaders: ["Content-Type", "Authorization"],
-			exposeHeaders: ["Set-Cookie"]
 		})
 	)
 	.get("/ok", (c: Context) => {
