@@ -13,7 +13,7 @@ const app = new Hono<HonoEnv>()
 	.use(
 		"/api/*",
 		cors({
-			origin: [envConfig.FRONTEND_URL, "http://localhost:5173"],
+			origin: [envConfig.FRONTEND_URL],
 			credentials: true,
 			allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
 		})
