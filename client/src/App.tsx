@@ -1,10 +1,10 @@
 import Home from "./components/Home";
 import { ThemeProvider } from "./components/theme-provider";
 import { Routes, Route } from "react-router-dom";
-import ProtectedRoute from "./protected-route";
 import Layout from "@/components/Layout";
 import SignIn from "./components/Sign-in";
 import SignUp from "./components/Sign-up";
+import ProtectedRoute from "./protected-route";
 
 const App = () => {
 	return (
