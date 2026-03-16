@@ -2,7 +2,7 @@ import { hc } from "hono/client";
 import type { AppType } from "../../../backend/src/types/hono";
 // import type { AppType } from "../../../backend/src/types/hono";
 
-export const client = hc<AppType>("https://vin-todo.up.railway.app", {
+export const client = hc<AppType>("/", {
 	init: {
 		credentials: "include",
 		headers: {
