@@ -39,15 +39,7 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 		);
 	}
 
-	return (
-		<div>
-			{/* ✅ Pansamantala — para makita natin kung may session */}
-			<pre className="text-xs bg-gray-100 p-4 rounded max-w-lg overflow-auto fixed bottom-0 left-0 z-50">
-				{JSON.stringify(sessionData, null, 2)}
-			</pre>
-			{children}
-		</div>
-	);
+	return { children };
 };
 
 export default ProtectedRoute;
