@@ -1,12 +1,24 @@
+import { authClient } from "@/lib/auth-client";
 import { useSession } from "@/lib/auth-client";
 import { type ReactNode, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 	const { data: session, isPending } = useSession();
+	const [sessionData, setSessionData] = useState<any>(null);
+	const [done, setDone] = useState(false);
 
-	// isPending lang ang kailangan — better-auth handles the fetch automatically
-	if (isPending) {
+	useEffect(() => {
+		const checkSession = async () => {
+			const { data } = await authClient.getSession();
+			console.log("Session check:", data); // ✅ makikita sa console
+			setSessionData(data);
+			setDone(true);
+		};
+		checkSession();
+	}, []);
+
+	if (isPending || !done) {
 		return (
 			<div className="flex justify-center items-center h-screen">
 				<div className="w-7 h-7 border-[3px] border-primary/10 border-t-primary border-b-primary rounded-full animate-spin" />
@@ -14,11 +26,28 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 		);
 	}
 
-	if (!session) {
-		return <Navigate to="/sign-in" replace />;
+	// ✅ Pansamantala — para makita natin kung may session
+	if (done && !sessionData) {
+		return (
+			<div className="flex justify-center items-center h-screen flex-col gap-4">
+				<p className="text-red-500">Session is NULL</p>
+				<pre className="text-xs bg-gray-100 p-4 rounded max-w-lg overflow-auto">
+					{JSON.stringify(sessionData, null, 2)}
+				</pre>
+				<Navigate to="/sign-in" replace />
+			</div>
+		);
 	}
 
-	return children;
+	return (
+		<div>
+			{/* ✅ Pansamantala — para makita natin kung may session */}
+			<pre className="text-xs bg-gray-100 p-4 rounded max-w-lg overflow-auto fixed bottom-0 left-0 z-50">
+				{JSON.stringify(sessionData, null, 2)}
+			</pre>
+			{children}
+		</div>
+	);
 };
 
 export default ProtectedRoute;
