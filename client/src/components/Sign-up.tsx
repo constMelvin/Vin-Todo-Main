@@ -11,11 +11,13 @@ import { FcGoogle } from "react-icons/fc";
 import { Button } from "@/components/ui/button";
 import { Input } from "./ui/input";
 import {
+	CheckCircle2Icon,
 	CheckIcon,
 	EyeIcon,
 	EyeOffIcon,
 	LockIcon,
 	MailIcon,
+	OctagonAlertIcon,
 	UserPen,
 	XIcon,
 } from "lucide-react";
@@ -26,6 +28,7 @@ import { z } from "zod";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
 
 const SignUpSchema = z
 	.object({
@@ -46,7 +49,7 @@ const SignUpSchema = z
 export type SignUpFormFields = z.infer<typeof SignUpSchema>;
 
 const SignUp = () => {
-	const { register, watch, handleSubmit } = useForm<SignUpFormFields>({
+	const { register, watch, handleSubmit, reset } = useForm<SignUpFormFields>({
 		resolver: zodResolver(SignUpSchema),
 	});
 	const email = watch("email");
@@ -57,8 +60,21 @@ const SignUp = () => {
 
 	const onSubmit: SubmitHandler<SignUpFormFields> = async (data) => {
 		try {
-			await authClient.signUp.email(data);
-			console.log(data);
+			const res = await authClient.signUp.email(data);
+			if (res.error) {
+				toast.error(res.error.message, {
+					icon: <OctagonAlertIcon />,
+					className: "gap-5",
+					position: "top-center",
+				});
+				return;
+			}
+			reset({ name: "", confirmPassword: "", password: "", email: "" });
+			toast.success("User Registered!", {
+				icon: <CheckCircle2Icon className="text-current" />,
+				position: "top-center",
+				duration: 1500,
+			});
 		} catch (error) {}
 	};
 
