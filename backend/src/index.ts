@@ -12,20 +12,26 @@ const app = new Hono<HonoEnv>();
 app.use(logger())
 	.onError(errorHandlerMiddleware)
 	.use(
-		"*", // ✅ apply to ALL routes (important for OAuth)
+		"/api/auth/*",
 		cors({
-			origin: envConfig.FRONTEND_URL, // ✅ string only
+			origin: envConfig.FRONTEND_URL,
 			credentials: true,
 			allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-			allowHeaders: ["Content-Type", "Authorization"],
+			allowHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+			exposeHeaders: ["Set-Cookie"], // ✅ expose Set-Cookie
 		})
 	)
-	.get("/ok", (c: Context) => {
-		return c.text("Backend Api ok.");
-	})
-	.on(["POST", "GET"], "/api/auth/**", (c) => {
-		return auth.handler(c.req.raw);
-	});
+	.use(
+		"*",
+		cors({
+			origin: envConfig.FRONTEND_URL,
+			credentials: true,
+			allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+			allowHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+		})
+	)
+	.get("/ok", (c: Context) => c.text("Backend Api ok."))
+	.on(["POST", "GET"], "/api/auth/**", (c) => auth.handler(c.req.raw));
 
 // your other routes
 const router = app.route("/api", rootRoutes);

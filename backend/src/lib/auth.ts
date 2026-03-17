@@ -5,9 +5,7 @@ import { db } from "@/db/database";
 import { envConfig } from "@/env";
 
 export const auth = betterAuth({
-	database: drizzleAdapter(db, {
-		provider: "pg", // or "pg" or "mysql"
-	}),
+	database: drizzleAdapter(db, { provider: "pg" }),
 	emailAndPassword: { enabled: true },
 	plugins: [openAPI()],
 	trustedOrigins: [envConfig.FRONTEND_URL],
@@ -15,12 +13,12 @@ export const auth = betterAuth({
 	advanced: {
 		useSecureCookies: true,
 		crossSubDomainCookies: {
-			enabled: false,
-			domain: envConfig.FRONTEND_URL,
+			enabled: false, // ✅ removed wrong domain
 		},
 		defaultCookieAttributes: {
 			sameSite: "none",
 			secure: true,
+			httpOnly: true, // ✅ add this
 		},
 	},
 	socialProviders: {
