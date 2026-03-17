@@ -72,7 +72,7 @@ export const userTodoStore = create(
 				await authClient.signIn.social({
 					provider: "google",
 					callbackURL: window.location.origin, // ✅ back to Vercel
-					errorCallbackURL: window.location.origin + "/login",
+					errorCallbackURL: window.location.origin + "/sign-in",
 				});
 			},
 		}),
