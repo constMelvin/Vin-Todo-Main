@@ -5,6 +5,7 @@ import Layout from "@/components/Layout";
 import SignIn from "./components/Sign-in";
 import SignUp from "./components/Sign-up";
 import ProtectedRoute from "./protected-route";
+import Callback from "./components/Callback";
 
 const App = () => {
 	return (
@@ -13,7 +14,7 @@ const App = () => {
 				<Routes>
 					<Route path="/sign-in" element={<SignIn />} />
 					<Route path="/sign-up" element={<SignUp />} />
-
+					<Route path="/auth/callback" element={<Callback />} />
 					<Route element={<Layout />}>
 						<Route
 							path="/"
