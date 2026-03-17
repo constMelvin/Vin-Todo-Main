@@ -7,17 +7,17 @@ import { cors } from "hono/cors";
 import type { HonoEnv } from "./types/hono";
 import { envConfig } from "./env";
 
-const app = new Hono<HonoEnv>()
-	.use(logger())
+const app = new Hono<HonoEnv>();
+
+app.use(logger())
 	.onError(errorHandlerMiddleware)
 	.use(
-		"/api/*",
+		"*", // ✅ apply to ALL routes (important for OAuth)
 		cors({
-			origin: [envConfig.FRONTEND_URL],
+			origin: envConfig.FRONTEND_URL, // ✅ string only
 			credentials: true,
 			allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
 			allowHeaders: ["Content-Type", "Authorization"],
-			exposeHeaders: ["Set-Cookie"]
 		})
 	)
 	.get("/ok", (c: Context) => {
@@ -27,15 +27,8 @@ const app = new Hono<HonoEnv>()
 		return auth.handler(c.req.raw);
 	});
 
+// your other routes
 const router = app.route("/api", rootRoutes);
-
-console.log(envConfig.FRONTEND_URL);
-
-/* All Routes here */
-
-// routes.forEach((route) => {
-// 	app = app.route("/api", route);
-// });
 
 export type AppType = typeof router;
 export default app;

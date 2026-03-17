@@ -12,7 +12,6 @@ export const auth = betterAuth({
 	plugins: [openAPI()],
 	trustedOrigins: [envConfig.FRONTEND_URL],
 	baseURL: envConfig.BETTER_AUTH_URL,
-
 	advanced: {
 		useSecureCookies: true,
 		crossSubDomainCookies: {
@@ -21,7 +20,6 @@ export const auth = betterAuth({
 		defaultCookieAttributes: {
 			sameSite: "none",
 			secure: true,
-			partitioned: true,
 		},
 	},
 	socialProviders: {
