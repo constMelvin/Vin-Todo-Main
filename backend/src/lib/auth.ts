@@ -7,7 +7,6 @@ import { envConfig } from "@/env";
 export const auth = betterAuth({
 	database: drizzleAdapter(db, { provider: "pg" }),
 	emailAndPassword: { enabled: true },
-
 	plugins: [openAPI()],
 	trustedOrigins: [envConfig.FRONTEND_URL],
 	baseURL: envConfig.BETTER_AUTH_URL,
@@ -20,7 +19,6 @@ export const auth = betterAuth({
 			sameSite: "none",
 			secure: true,
 			httpOnly: true, // ✅ add this
-			partitioned: true,
 		},
 	},
 	socialProviders: {
