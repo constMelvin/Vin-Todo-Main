@@ -10,7 +10,11 @@ const ProtectedRoute = ({ children }: { children: ReactNode }) => {
 
 	useEffect(() => {
 		const checkSession = async () => {
-			const { data } = await authClient.getSession();
+			const { data } = await authClient.getSession({
+				fetchOptions: {
+					credentials: "include",
+				},
+			});
 			console.log("Session check:", data); // ✅ makikita sa console
 			setSessionData(data);
 			setDone(true);
