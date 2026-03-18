@@ -31,7 +31,6 @@ export const auth = betterAuth({
 	},
 	socialProviders: {
 		google: {
-			redirectURI: envConfig.FRONTEND_URL,
 			prompt: "select_account",
 			clientId: envConfig.GOOGLE_CLIENT_ID,
 			clientSecret: envConfig.GOOGLE_CLIENT_SECRET,
