@@ -10,19 +10,28 @@ export const auth = betterAuth({
 	plugins: [openAPI()],
 	trustedOrigins: [envConfig.FRONTEND_URL],
 	baseURL: envConfig.BETTER_AUTH_URL,
+	session: {
+		cookieCache: {
+			enabled: true,
+			maxAge: 7 * 24 * 60 * 60,
+		},
+	},
+	account: {
+		encryptOAuthTokens: true,
+	},
 	advanced: {
 		useSecureCookies: true,
 		crossSubDomainCookies: {
 			enabled: false, // ✅ removed wrong domain
 		},
 		defaultCookieAttributes: {
-			sameSite: "none",
 			secure: true,
-			httpOnly: true, // ✅ add this
+			sameSite: "none",
 		},
 	},
 	socialProviders: {
 		google: {
+			redirectURI: envConfig.FRONTEND_URL,
 			prompt: "select_account",
 			clientId: envConfig.GOOGLE_CLIENT_ID,
 			clientSecret: envConfig.GOOGLE_CLIENT_SECRET,
