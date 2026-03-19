@@ -1,33 +1,21 @@
 {
 	"compilerOptions": {
-		/* Defaults */
 		"esModuleInterop": true,
 		"skipLibCheck": true,
 		"target": "ESNext",
 		"allowJs": true,
-		"checkJs": true,
 		"resolveJsonModule": true,
 		"moduleDetection": "force",
-		"forceConsistentCasingInFileNames": true,
 		"strict": true,
-		"noUncheckedIndexedAccess": true,
-
-		/* IMPORTANT: enable .js import behavior */
-		"verbatimModuleSyntax": true,
-
-		/* Paths */
-		"baseUrl": ".",
-		"paths": {
-			"@/*": ["./src/*"]
-		},
-
-		/* CHANGE HERE 👇 */
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
-
+		"baseUrl": "./src",
+		"paths": {
+			"@/*": ["./*"]
+		},
 		"rootDir": "./src",
 		"outDir": "./dist"
 	},
-	"include": ["src/**/*.ts", ".eslintrc.json"],
-	"exclude": ["node_modules", "dist", "vitest.config.ts"]
+	"include": ["src/**/*.ts"],
+	"exclude": ["node_modules", "dist"]
 }
