@@ -1,5 +1,6 @@
 {
 	"name": "backend",
+	"type": "module",
 	"scripts": {
 		"build": "tsc && tsc-alias",
 		"start": "node dist/server.js",

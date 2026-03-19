@@ -4,8 +4,8 @@ import { getAllTodoListController } from "./get-all-todo-list.js";
 import { createTodoController } from "./create-todo.js";
 import { updateTodoController } from "./update-todo.js";
 import { deleteTodoController } from "./delete-todo.js";
-import { authMiddleware } from "@middlewares/authMiddleware.js";
-import { CreateValueSchema, UpdateValueSchema } from "@db/typeSchema.js";
+import { authMiddleware } from "../../middlewares/authMiddleware.js";
+import { CreateValueSchema, UpdateValueSchema } from "../../db/typeSchema.js";
 
 // const UpdateValueSchema = z.object({
 // 	task_name: z.string().optional(),

@@ -8,20 +8,10 @@
 		"moduleDetection": "force",
 		"strict": true,
 		"noUncheckedIndexedAccess": true,
-		"module": "commonjs",
-		"moduleResolution": "node",
-		"baseUrl": ".",
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
 		"rootDir": "./src",
-		"outDir": "./dist",
-		"paths": {
-			"@controllers/*": ["src/controllers/*"],
-			"@data/*": ["src/data/*"],
-			"@db/*": ["src/db/*"],
-			"@lib/*": ["src/lib/*"],
-			"@middlewares/*": ["src/middlewares/*"],
-			"@types/*": ["src/types/*"],
-			"@utils/*": ["src/utils/*"]
-		}
+		"outDir": "./dist"
 	},
 	"include": ["src/**/*.ts"],
 	"exclude": ["node_modules", "dist"]

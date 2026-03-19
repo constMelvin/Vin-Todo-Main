@@ -1,7 +1,7 @@
-import { updateTodoData } from "@data/update-todo.js";
-import { UpdateTodoInput } from "@db/typeSchema.js";
-import { NotFoundError } from "@utils/errors.js";
 import type { Context } from "hono";
+import { UpdateTodoInput } from "../../db/typeSchema.js";
+import { NotFoundError } from "../../utils/errors.js";
+import { updateTodoData } from "../../data/update-todo.js";
 
 export const updateTodoController = async (
 	c: Context,

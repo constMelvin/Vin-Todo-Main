@@ -1,6 +1,6 @@
-import { getAllTodoData } from "@data/get-all-todo.js";
-import { NotFoundError } from "@utils/errors.js";
 import type { Context } from "hono";
+import { getAllTodoData } from "../../data/get-all-todo.js";
+import { NotFoundError } from "../../utils/errors.js";
 
 
 
