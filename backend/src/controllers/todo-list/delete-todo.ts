@@ -1,5 +1,6 @@
-import { deleteTodoData } from "@/data/delete-todo";
+import { deleteTodoData } from "@/data/delete-todo.js";
 import type { Context } from "hono";
+
 
 export const deleteTodoController = async (c: Context) => {
 	const todoId = c.req.param("id");

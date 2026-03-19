@@ -1,11 +1,13 @@
 import { Hono, type Context } from "hono";
-import { auth } from "./lib/auth";
-import { rootRoutes } from "./controllers/routes";
-import { errorHandlerMiddleware } from "./middlewares/error-handler";
+
 import { logger } from "hono/logger";
 import { cors } from "hono/cors";
-import type { HonoEnv } from "./types/hono";
-import { envConfig } from "./env";
+import type { HonoEnv } from "./types/hono.js";
+import { errorHandlerMiddleware } from "./middlewares/error-handler.js";
+import { envConfig } from "./env.js";
+import { auth } from "./lib/auth.js";
+import { rootRoutes } from "./controllers/routes.js";
+
 
 const app = new Hono<HonoEnv>();
 

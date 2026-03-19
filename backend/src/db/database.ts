@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { drizzle } from "drizzle-orm/node-postgres";
 import { Pool } from "pg";
-import * as schema from "@/db/schema";
+import * as schema from "@/db/schema.js";
 
 export const pool = new Pool({
 	connectionString: process.env.DATABASE_URL!,
@@ -11,5 +11,3 @@ export const pool = new Pool({
 
 // You can specify any property from the node-postgres connection options
 export const db = drizzle(pool, { schema, casing: "snake_case" });
-
-

@@ -1,17 +1,11 @@
+import { createTodoData } from "@/data/create-todo.js";
+import { db } from "@/db/database.js";
+import { CreateValueSchema, type CreateTodoInput } from "@/db/typeSchema.js";
+import { BadRequestError, InternalServerError } from "@/utils/errors.js";
 import type { Context } from "hono";
-import z from "zod";
+
 import { v4 as uuidv4 } from "uuid";
-import { BadRequestError, InternalServerError } from "@/utils/errors";
-import { createTodoData } from "@/data/create-todo";
-import { db } from "@/db/database";
-import { CreateValueSchema, type CreateTodoInput } from "@/db/typeSchema";
 
-// const valuesSchema = z.object({
-// 	description: z.string().min(1),
-// 	task_name: z.string().min(1),
-// });
-
-// type BodyTypes = z.infer<typeof valuesSchema>;
 
 export const createTodoController = async (
 	c: Context,

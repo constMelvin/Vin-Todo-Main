@@ -11,20 +11,23 @@
 		"forceConsistentCasingInFileNames": true,
 		"strict": true,
 		"noUncheckedIndexedAccess": true,
-		"verbatimModuleSyntax": false, // ← false, conflicts pag CommonJS
+
+		/* IMPORTANT: enable .js import behavior */
+		"verbatimModuleSyntax": true,
 
 		/* Paths */
-		"baseUrl": "./src", // ← changed
+		"baseUrl": ".",
 		"paths": {
-			"@/*": ["./*"] // ← updated to match new baseUrl
+			"@/*": ["./src/*"]
 		},
 
-		/* Bundling */
-		"module": "Preserve", // ← add this
-		"moduleResolution": "Bundler",
-		"rootDir": "./src", // ← add this
+		/* CHANGE HERE 👇 */
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+
+		"rootDir": "./src",
 		"outDir": "./dist"
 	},
-	"include": ["src/**/*.ts"],
-	"exclude": ["node_modules", "dist"]
+	"include": ["src/**/*.ts", ".eslintrc.json"],
+	"exclude": ["node_modules", "dist", "vitest.config.ts"]
 }

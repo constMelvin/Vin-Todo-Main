@@ -1,6 +1,7 @@
-import { auth } from "@/lib/auth";
-import { db } from "@/db/database";
-import type { AppType } from "..";
+import type { db } from "@/db/database.js";
+import type { auth } from "@/lib/auth.js";
+
+
 
 type Session = typeof auth.$Infer.Session.session | null;
 
@@ -17,4 +18,3 @@ export type HonoEnv = {
 	};
 };
 
-export type { AppType };

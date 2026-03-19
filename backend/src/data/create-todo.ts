@@ -1,7 +1,8 @@
-import { db } from "@/db/database";
-import { todos } from "@/db/schema";
-import { BadRequestError } from "@/utils/errors";
+import type { db } from "@/db/database.js";
+import { todos } from "@/db/schema.js";
+import { BadRequestError } from "@/utils/errors.js";
 import type { InferInsertModel } from "drizzle-orm";
+
 
 export type CreateTodoArgs = {
 	dbCLient: typeof db;

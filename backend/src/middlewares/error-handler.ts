@@ -1,7 +1,9 @@
 // import type { HonoEnv } from '@/types/hono';
-import { makeError } from "@/utils/errors";
+
 // import { pinoLogger } from '@/utils/logger';
+import { makeError } from "@/utils/errors.js";
 import type { Context } from "hono";
+
 
 export async function errorHandlerMiddleware(err: Error, c: Context) {
 	const { error, statusCode } = makeError(err);

@@ -2,8 +2,8 @@
 	"name": "backend",
 	"type": "module",
 	"scripts": {
-		"build": "tsc",
-		"start": "tsx src/server.ts",
+		"build": "tsc && tsc-alias",
+		"start": "node dist/server.js",
 		"dev": "tsx watch src/index.ts",
 		"db:generate:migration": "drizzle-kit generate",
 		"db:push": "drizzle-kit push",
