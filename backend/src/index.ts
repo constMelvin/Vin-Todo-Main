@@ -1,5 +1,4 @@
 import { Hono, type Context } from "hono";
-
 import { logger } from "hono/logger";
 import { cors } from "hono/cors";
 import type { HonoEnv } from "./types/hono.js";
@@ -8,8 +7,9 @@ import { envConfig } from "./env.js";
 import { auth } from "./lib/auth.js";
 import { rootRoutes } from "./controllers/routes.js";
 
-
 const app = new Hono<HonoEnv>();
+
+const welcomeString = ["Backend API", "API Working properly"];
 
 app.use(logger())
 	.onError(errorHandlerMiddleware)
@@ -32,6 +32,9 @@ app.use(logger())
 			allowHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
 		})
 	)
+	.get("/", (c: Context) => {
+		return c.text(welcomeString.join("\n\n"));
+	})
 	.get("/ok", (c: Context) => c.text("Backend Api ok."))
 	.on(["POST", "GET"], "/api/auth/**", (c) => auth.handler(c.req.raw));
 
