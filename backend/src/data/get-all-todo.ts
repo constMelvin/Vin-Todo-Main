@@ -1,7 +1,7 @@
-import type { db } from "@/db/database.js";
-import { todos } from "@/db/schema.js";
-import { InternalServerError } from "@/utils/errors.js";
+import { db } from "db/database.js";
+import { todos } from "db/schema.js";
 import { eq } from "drizzle-orm";
+import { InternalServerError } from "utils/errors.js";
 
 
 export type GetTodoDataArgs = {

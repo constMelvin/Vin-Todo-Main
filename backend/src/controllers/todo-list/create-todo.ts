@@ -1,8 +1,9 @@
-import { createTodoData } from "@/data/create-todo.js";
-import { db } from "@/db/database.js";
-import { CreateValueSchema, type CreateTodoInput } from "@/db/typeSchema.js";
-import { BadRequestError, InternalServerError } from "@/utils/errors.js";
+
+import { createTodoData } from "data/create-todo.js";
+import { db } from "db/database.js";
+import { CreateTodoInput, CreateValueSchema } from "db/typeSchema.js";
 import type { Context } from "hono";
+import { BadRequestError, InternalServerError } from "utils/errors.js";
 
 import { v4 as uuidv4 } from "uuid";
 

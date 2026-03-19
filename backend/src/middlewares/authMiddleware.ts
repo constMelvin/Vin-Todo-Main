@@ -1,7 +1,7 @@
-import { db } from "@/db/database.js";
-import { auth } from "@/lib/auth.js";
-import type { HonoEnv } from "@/types/hono.js";
-import { UnauthorizedError } from "@/utils/errors.js";
+import { db } from "db/database.js";
+import { auth } from "lib/auth.js";
+import type { HonoEnv } from "types/hono.js";
+import { UnauthorizedError } from "utils/errors.js";
 import type { Context, MiddlewareHandler, Next } from "hono";
 
 

@@ -1,5 +1,5 @@
-import type { db } from "@/db/database.js";
-import type { auth } from "@/lib/auth.js";
+import type { db } from "db/database.js";
+import type { auth } from "lib/auth.js";
 
 
 

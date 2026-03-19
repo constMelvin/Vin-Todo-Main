@@ -11,9 +11,6 @@
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
 		"baseUrl": "./src",
-		"paths": {
-			"@/*": ["./*"]
-		},
 		"rootDir": "./src",
 		"outDir": "./dist"
 	},

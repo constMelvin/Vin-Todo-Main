@@ -1,9 +1,8 @@
-
-import type { db } from "@/db/database.js";
-import { todos } from "@/db/schema.js";
-import { UpdateValueSchema, type UpdateTodoInput } from "@/db/typeSchema.js";
-import { NotFoundError } from "@/utils/errors.js";
+import { db } from "db/database.js";
+import { todos } from "db/schema.js";
+import { UpdateTodoInput, UpdateValueSchema } from "db/typeSchema.js";
 import { eq, sql } from "drizzle-orm";
+import { NotFoundError } from "utils/errors.js";
 
 
 export type UpdateTodoArgs = {

@@ -1,6 +1,7 @@
-import { getAllTodoData } from "@/data/get-all-todo.js";
-import { NotFoundError } from "@/utils/errors.js";
+
+import { getAllTodoData } from "data/get-all-todo.js";
 import type { Context } from "hono";
+import { NotFoundError } from "utils/errors.js";
 
 
 export const getAllTodoListController = async (c: Context) => {
