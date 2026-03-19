@@ -10,9 +10,18 @@
 		"noUncheckedIndexedAccess": true,
 		"module": "NodeNext",
 		"moduleResolution": "NodeNext",
-		"baseUrl": "./src",
+		"baseUrl": ".",
 		"rootDir": "./src",
-		"outDir": "./dist"
+		"outDir": "./dist",
+		"paths": {
+			"@controllers/*": ["src/controllers/*"],
+			"@data/*": ["src/data/*"],
+			"@db/*": ["src/db/*"],
+			"@lib/*": ["src/lib/*"],
+			"@middlewares/*": ["src/middlewares/*"],
+			"@types/*": ["src/types/*"],
+			"@utils/*": ["src/utils/*"]
+		}
 	},
 	"include": ["src/**/*.ts"],
 	"exclude": ["node_modules", "dist"]

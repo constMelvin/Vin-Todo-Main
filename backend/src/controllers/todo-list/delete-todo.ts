@@ -1,5 +1,5 @@
-;
-import { deleteTodoData } from "data/delete-todo.js";
+
+import { deleteTodoData } from "@data/delete-todo.js";
 import type { Context } from "hono";
 
 
