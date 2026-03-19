@@ -1,5 +1,4 @@
 // import type { HonoEnv } from '@/types/hono';
-
 // import { pinoLogger } from '@/utils/logger';
 import { makeError } from "@/utils/errors.js";
 import type { Context } from "hono";
