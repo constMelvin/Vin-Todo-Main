@@ -1,9 +1,8 @@
 import { hc } from "hono/client";
 import type { AppType } from "../../../backend/src/types/hono";
-// import type { AppType } from "../../../backend/src/types/hono";
 const api = import.meta.env.VITE_API_URL;
 
-export const client = hc<AppType>(api, {
+export const client = hc<AppType>("/", {
 	init: {
 		credentials: "include",
 		headers: {
@@ -11,5 +10,3 @@ export const client = hc<AppType>(api, {
 		},
 	},
 });
-
-
