@@ -7,7 +7,12 @@ import { db } from "../db/database.js";
 export const auth = betterAuth({
 	database: drizzleAdapter(db, { provider: "pg" }),
 	emailAndPassword: { enabled: true },
-	plugins: [openAPI(), oAuthProxy()],
+	plugins: [
+		openAPI(),
+		oAuthProxy({
+			productionURL: envConfig.BETTER_AUTH_URL,
+		}),
+	],
 	trustedOrigins: [envConfig.FRONTEND_URL],
 	baseURL: envConfig.BETTER_AUTH_URL,
 	account: {
