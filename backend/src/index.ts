@@ -20,7 +20,6 @@ app.use(logger())
 			credentials: true,
 			allowMethods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
 			allowHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
-			exposeHeaders: ["Set-Cookie"], // ✅ expose Set-Cookie
 		})
 	)
 	.use(
