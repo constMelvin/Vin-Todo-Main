@@ -9,7 +9,6 @@ export const auth = betterAuth({
 	emailAndPassword: { enabled: true },
 	plugins: [
 		openAPI(),
-		// oAuthProxy({ productionURL: envConfig.BETTER_AUTH_URL }),
 	],
 	trustedOrigins: [envConfig.FRONTEND_URL],
 	baseURL: envConfig.BETTER_AUTH_URL,
