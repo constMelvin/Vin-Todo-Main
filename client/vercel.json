@@ -2,7 +2,7 @@
 	"rewrites": [
 		{
 			"source": "/api/:path*",
-			"destination": "https://vin-todo-api.vercel.app/api/:path*"
+			"destination": "https://vin-todo.up.railway.app/api/:path*"
 		},
 		{
 			"source": "/(.*)",
