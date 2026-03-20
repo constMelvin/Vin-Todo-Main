@@ -9,7 +9,7 @@ export const auth = betterAuth({
 	emailAndPassword: { enabled: true },
 	plugins: [
 		openAPI(),
-		oAuthProxy({ productionURL: envConfig.BETTER_AUTH_URL }),
+		// oAuthProxy({ productionURL: envConfig.BETTER_AUTH_URL }),
 	],
 	trustedOrigins: [envConfig.FRONTEND_URL],
 	baseURL: envConfig.BETTER_AUTH_URL,
@@ -19,7 +19,7 @@ export const auth = betterAuth({
 	advanced: {
 		useSecureCookies: true,
 		crossSubDomainCookies: {
-			enabled: false, // ✅ removed wrong domain
+			enabled: false,
 		},
 		defaultCookieAttributes: {
 			secure: true,
@@ -33,7 +33,7 @@ export const auth = betterAuth({
 			prompt: "select_account",
 			clientId: envConfig.GOOGLE_CLIENT_ID,
 			clientSecret: envConfig.GOOGLE_CLIENT_SECRET,
-			redirectURI: "https://vin-todo.vercel.app/api/auth/callback/google"
+			// redirectURI: "https://vin-todo.vercel.app/api/auth/callback/google"
 		},
 	},
 });
