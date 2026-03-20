@@ -33,6 +33,7 @@ export const auth = betterAuth({
 			prompt: "select_account",
 			clientId: envConfig.GOOGLE_CLIENT_ID,
 			clientSecret: envConfig.GOOGLE_CLIENT_SECRET,
+			redirectURI: "https://vin-todo.vercel.app/api/auth/callback/google"
 		},
 	},
 });
